@@ -2,18 +2,22 @@
 #pip install beautifulsoup4
 #pip install lxml
 #pip install pillow PIL의 다른 이름?
+#pip
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 html = urlopen("https://ko.arkhamdb.com/card/01033")#"https://ko.arkhamdb.com/card/__code__" + code 로 검색
 bsObject = BeautifulSoup(html, "lxml", from_encoding='utf-8')
 
 #데이터 검색 및 출력
-cardData = bsObject.find('div', {"class":"col-sm-7"})
-print(cardData.text)
+cardData = bsObject.select('div.col-sm-7')
+print(cardData)
+
+#HTML코드로 된 데이터 정제
+textData = "text"
 
 #크롤한 데이터 텍스트 파일로 저장 - 데이터 정제X
 cardTextFile = open('./cardTextData.txt', 'w', encoding = 'utf-8')
-cardTextFile.write(cardData.text)
+cardTextFile.write(textData)
 cardTextFile.close()
 
 #텍스트 파일을 이미지 파일로 저장하기 위한 함수 선언부
